@@ -9,8 +9,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
 public class PharmaApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PharmaApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PharmaApplication.class, args);
+    }
+
 
 }
