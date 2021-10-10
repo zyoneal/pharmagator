@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql:pharmagator
+    username: postgres
+    password: ap20201010
+    jpa:
+      hibernate:
+        ddl-auto: validate
