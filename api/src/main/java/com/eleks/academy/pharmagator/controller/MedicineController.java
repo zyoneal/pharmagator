@@ -18,17 +18,17 @@ public class MedicineController {
     @Autowired
     private MedicineService ms;
 
-    @GetMapping("/getListOfMedicines")
+    @GetMapping
     public ResponseEntity<List<Medicine>> getAllMedicines() {
         return ResponseEntity.ok(ms.getAllMedicines());
     }
 
-    @GetMapping("/getMedicineById/{medicineId}")
+    @GetMapping("/{medicineId}")
     public ResponseEntity<Medicine> getMedicineById(@PathVariable("medicineId") Long medicineId) {
         return ResponseEntity.ok(ms.getMedicine(medicineId));
     }
 
-    @DeleteMapping("/deleteMedicineById/{medicineId}")
+    @DeleteMapping("/{medicineId}")
     public ResponseEntity<String> deleteMedicine(@PathVariable("medicineId") Long medicineId) {
         ms.deleteMedicine(medicineId);
         return ResponseEntity.ok("Medicine id:" + medicineId + " was successfully deleted");

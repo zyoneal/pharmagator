@@ -19,17 +19,17 @@ public class PharmacyController {
     private PharmacyService ps;
 
 
-    @GetMapping("/getListOfPharmacies")
+    @GetMapping
     public ResponseEntity<List<Pharmacy>> getAllPharmacies() {
         return ResponseEntity.ok(ps.getAllPharmacies());
     }
 
-    @GetMapping("/getPharmacyById/{pharmacyId}")
+    @GetMapping("/{pharmacyId}")
     public ResponseEntity<Pharmacy> getPharmacyById(@PathVariable("pharmacyId") Long pharmacyId) {
         return ResponseEntity.ok(ps.getPharmacy(pharmacyId));
     }
 
-    @DeleteMapping("/deletePharmacyById/{pharmacyId}")
+    @DeleteMapping("/{pharmacyId}")
     public ResponseEntity<String> deletePharmacy(@PathVariable("pharmacyId") Long pharmacyId) {
         ps.deletePharmacy(pharmacyId);
         return ResponseEntity.ok("pharmacy id:" + pharmacyId + " was successfully deleted");

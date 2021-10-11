@@ -16,15 +16,15 @@ public class PriceController {
     @Autowired
     private PriceService ps;
 
-    @GetMapping("/getListOfPrices")
+    @GetMapping
     public ResponseEntity<List<Price>> getAllPrices() {
         return ResponseEntity.ok(ps.getAllPrices());
     }
 
 
     //TODO get price by id
-/*    @GetMapping("/getPriceById")
-    public ResponseEntity<Price> getPrice() {
+/*    @GetMapping("/{pharmacyId}/{medicineId}")
+    public ResponseEntity<Price> getPrice(@PathVariable("pharmacyId") Long pharmacyId,@PathVariable("pharmacyId") Long medicineId,) {
         return ResponseEntity.ok(ps.getPrice());
     }*/
 
