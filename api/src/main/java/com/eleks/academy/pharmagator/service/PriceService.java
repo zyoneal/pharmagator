@@ -2,32 +2,28 @@ package com.eleks.academy.pharmagator.service;
 
 import com.eleks.academy.pharmagator.dao.PriceRepository;
 import com.eleks.academy.pharmagator.entities.Price;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eleks.academy.pharmagator.view.PriceRequest;
+import com.eleks.academy.pharmagator.view.PriceResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class PriceService {
-    @Autowired
+
     private PriceRepository priceRepository;
 
-
-    public List<Price> getAllPrices() {
-        return priceRepository.findAll();
+    public List<PriceResponse> getAllPrices() {
+        return this.priceRepository.findAll().stream().map(PriceResponse::of).collect(Collectors.toList());
     }
 
-    //TODO get price
-/*    public Price getPrice() {
-        return priceRepository.findById(1L).get();
-    }*/
-
-    //TODO delete price
-/*    public void deletePrice(Long medicineId) {
-        priceRepository.deleteById(medicineId);
-    }*/
-
-    public Price saveOrUpdate(Price price) {
-        return priceRepository.save(price);
+    public void saveOrUpdate(PriceRequest priceRequest) {
+        Price priceEntity = new Price();
+        priceEntity.of(priceRequest);
+        this.priceRepository.save(priceEntity);
     }
+
 }
