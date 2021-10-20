@@ -1,47 +1,33 @@
 package com.eleks.academy.pharmagator.controller;
 
-import com.eleks.academy.pharmagator.entities.Price;
 import com.eleks.academy.pharmagator.service.PriceService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import com.eleks.academy.pharmagator.view.PriceRequest;
+import com.eleks.academy.pharmagator.view.PriceResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequiredArgsConstructor
 @RequestMapping("/prices")
 public class PriceController {
-    @Autowired
-    private PriceService ps;
+
+    private final PriceService priceService;
 
     @GetMapping
-    public ResponseEntity<List<Price>> getAllPrices() {
-        return ResponseEntity.ok(ps.getAllPrices());
+    public List<PriceResponse> getAllPrices() {
+        return this.priceService.getAllPrices();
     }
 
-
-    //TODO get price by id
-/*    @GetMapping("/{pharmacyId}/{medicineId}")
-    public ResponseEntity<Price> getPrice(@PathVariable("pharmacyId") Long pharmacyId,@PathVariable("pharmacyId") Long medicineId,) {
-        return ResponseEntity.ok(ps.getPrice());
-    }*/
-
-    //TODO delete price by id
-/*    @DeleteMapping("/deletePriceById/{medicineId}")
-    public void deletePrice(@PathVariable("medicineId") Long medicineId) {
-        ps.deletePrice(medicineId);
-    }*/
-
-
     @PostMapping
-    public ResponseEntity<Price> savePrice(@RequestBody Price price) {
-        return new ResponseEntity<>(ps.saveOrUpdate(price), HttpStatus.CREATED);
+    public void createPrice(@RequestBody PriceRequest priceRequest) {
+        this.priceService.saveOrUpdate(priceRequest);
     }
 
     @PutMapping
-    public ResponseEntity<Price> updatePharmacy(@RequestBody Price price) {
-        return ResponseEntity.ok(ps.saveOrUpdate(price));
+    public void updatePrice(@RequestBody PriceRequest priceRequest) {
+        this.priceService.saveOrUpdate(priceRequest);
     }
+
 }

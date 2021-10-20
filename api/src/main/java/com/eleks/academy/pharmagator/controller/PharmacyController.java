@@ -1,47 +1,47 @@
 package com.eleks.academy.pharmagator.controller;
 
-import com.eleks.academy.pharmagator.entities.Pharmacy;
 import com.eleks.academy.pharmagator.service.PharmacyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import com.eleks.academy.pharmagator.view.PharmacyResponse;
+import com.eleks.academy.pharmagator.view.PharmacyRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@Controller
+@RequiredArgsConstructor
 @RequestMapping("/pharmacies")
 public class PharmacyController {
 
-    @Autowired
-    private PharmacyService ps;
-
+    private final PharmacyService pharmacyService;
 
     @GetMapping
-    public ResponseEntity<List<Pharmacy>> getAllPharmacies() {
-        return ResponseEntity.ok(ps.getAllPharmacies());
+    public List<PharmacyResponse> getAllPharmacies() {
+        return this.pharmacyService.getAllPharmacies();
     }
 
     @GetMapping("/{pharmacyId}")
-    public ResponseEntity<Pharmacy> getPharmacyById(@PathVariable("pharmacyId") Long pharmacyId) {
-        return ResponseEntity.ok(ps.getPharmacy(pharmacyId));
+    public ResponseEntity<PharmacyResponse> getPharmacyById(@PathVariable("pharmacyId") Long pharmacyId) {
+        return this.pharmacyService.getPharmacy(pharmacyId);
     }
 
     @DeleteMapping("/{pharmacyId}")
     public ResponseEntity<String> deletePharmacy(@PathVariable("pharmacyId") Long pharmacyId) {
-        ps.deletePharmacy(pharmacyId);
+        this.pharmacyService.deletePharmacy(pharmacyId);
         return ResponseEntity.ok("pharmacy id:" + pharmacyId + " was successfully deleted");
     }
 
     @PostMapping
-    public ResponseEntity<Pharmacy> savePharmacy(@RequestBody Pharmacy pharmacy) {
-        return new ResponseEntity<>(ps.saveOrUpdate(pharmacy), HttpStatus.CREATED);
+    public void createPharmacy(@RequestBody PharmacyRequest pharmacyRequest) {
+        this.pharmacyService.createOrUpdate(pharmacyRequest);
     }
 
     @PutMapping
-    public ResponseEntity<Pharmacy> updatePharmacy(@RequestBody Pharmacy pharmacy) {
-        return ResponseEntity.ok(ps.saveOrUpdate(pharmacy));
+    public void updatePharmacy(@Valid @RequestBody PharmacyRequest pharmacyRequest) {
+        this.pharmacyService.createOrUpdate(pharmacyRequest);
     }
+
 }
+

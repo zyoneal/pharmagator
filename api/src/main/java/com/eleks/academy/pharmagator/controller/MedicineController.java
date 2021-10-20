@@ -1,47 +1,46 @@
 package com.eleks.academy.pharmagator.controller;
 
-
-import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.service.MedicineService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import com.eleks.academy.pharmagator.view.MedicineRequest;
+import com.eleks.academy.pharmagator.view.MedicineResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequiredArgsConstructor
 @RequestMapping("/medicines")
 public class MedicineController {
 
-    @Autowired
-    private MedicineService ms;
+    private final MedicineService medicineService;
 
     @GetMapping
-    public ResponseEntity<List<Medicine>> getAllMedicines() {
-        return ResponseEntity.ok(ms.getAllMedicines());
+    public List<MedicineResponse> getAllMedicines() {
+        return this.medicineService.getAllMedicines();
     }
 
     @GetMapping("/{medicineId}")
-    public ResponseEntity<Medicine> getMedicineById(@PathVariable("medicineId") Long medicineId) {
-        return ResponseEntity.ok(ms.getMedicine(medicineId));
+    public ResponseEntity<MedicineResponse> getMedicineById(@PathVariable("medicineId") Long medicineId) {
+        return this.medicineService.getMedicine(medicineId);
     }
 
     @DeleteMapping("/{medicineId}")
     public ResponseEntity<String> deleteMedicine(@PathVariable("medicineId") Long medicineId) {
-        ms.deleteMedicine(medicineId);
+        this.medicineService.deleteMedicine(medicineId);
         return ResponseEntity.ok("Medicine id:" + medicineId + " was successfully deleted");
     }
 
-
     @PostMapping
-    public ResponseEntity<Medicine> saveMedicine(@RequestBody Medicine medicine) {
-        return new ResponseEntity<>(ms.saveOrUpdate(medicine), HttpStatus.CREATED);
+    public void createMedicine(@RequestBody MedicineRequest medicineRequest) {
+        this.medicineService.createOrUpdate(medicineRequest);
     }
 
     @PutMapping
-    public ResponseEntity<Medicine> updateMedicine(@RequestBody Medicine medicine) {
-        return ResponseEntity.ok(ms.saveOrUpdate(medicine));
+    public void updateMedicine(@RequestBody MedicineRequest medicineRequest) {
+        this.medicineService.createOrUpdate(medicineRequest);
     }
+
 }
+
