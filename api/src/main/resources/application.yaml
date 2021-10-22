@@ -2,11 +2,18 @@ spring:
   datasource:
     url: jdbc:postgresql:pharmagator
     username: postgres
+<<<<<<< HEAD
     password: ap20201010
     jpa:
       hibernate:
         ddl-auto: validate
 
+=======
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+>>>>>>> f4389f55eda148a046470d1096abd5cb293353ae
 
 
 pharmagator:
@@ -15,6 +22,9 @@ pharmagator:
       url: https://api-int.apteka-ds.com.ua/api/v1
       category-fetch-url: /category-menu
       category-path: /cat-prods-by-page
+<<<<<<< HEAD
 
     apteka-liki24:
       url: https://liki24.com/vnext/api/catalogue/8000001/products
+=======
+>>>>>>> f4389f55eda148a046470d1096abd5cb293353ae

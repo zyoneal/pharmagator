@@ -12,9 +12,16 @@ import java.util.List;
 public class CategoryDto {
 
     private String name;
+<<<<<<< HEAD
 
     private String slug;
 
     private List<CategoryDto> children;
 
 }
+=======
+    private String slug;
+    private List<CategoryDto> children;
+
+}
+>>>>>>> f4389f55eda148a046470d1096abd5cb293353ae

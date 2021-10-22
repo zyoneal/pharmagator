@@ -22,11 +22,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+<<<<<<< HEAD
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.postgresql:postgresql:42.2.24'
     implementation 'org.flywaydb:flyway-core:7.15.0'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'org.modelmapper:modelmapper:2.1.1'
+=======
+    implementation 'org.postgresql:postgresql:42.2.24'
+    implementation 'org.flywaydb:flyway-core:7.15.0'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+>>>>>>> f4389f55eda148a046470d1096abd5cb293353ae
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
