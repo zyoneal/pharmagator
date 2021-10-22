@@ -27,4 +27,5 @@ public class Scheduler {
     private void storeToDatabase(MedicineDto dto) {
         log.info(dto.getTitle() + " - " + dto.getPrice());
     }
+
 }

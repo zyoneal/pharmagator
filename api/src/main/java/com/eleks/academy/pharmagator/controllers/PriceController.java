@@ -1,4 +1,4 @@
-package com.eleks.academy.pharmagator.controller;
+package com.eleks.academy.pharmagator.controllers;
 
 import com.eleks.academy.pharmagator.service.PriceService;
 import com.eleks.academy.pharmagator.view.PriceRequest;
