@@ -1,11 +1,20 @@
 package com.eleks.academy.pharmagator.controllers;
 
+<<<<<<< HEAD
 import com.eleks.academy.pharmagator.service.PharmacyService;
 import com.eleks.academy.pharmagator.view.PharmacyResponse;
 import com.eleks.academy.pharmagator.view.PharmacyRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+=======
+import com.eleks.academy.pharmagator.projections.PharmacyLight;
+import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> development
 
 import javax.validation.Valid;
 import java.util.List;
@@ -15,6 +24,7 @@ import java.util.List;
 @RequestMapping("/pharmacies")
 public class PharmacyController {
 
+<<<<<<< HEAD
     private final PharmacyService pharmacyService;
 
     @GetMapping
@@ -43,5 +53,14 @@ public class PharmacyController {
         this.pharmacyService.createOrUpdate(pharmacyRequest);
     }
 
+=======
+    private final PharmacyRepository pharmacyRepository;
+
+    @GetMapping
+    public List<PharmacyLight> getAll() {
+        return this.pharmacyRepository.findAllLight();
+    }
+
+>>>>>>> development
 }
 

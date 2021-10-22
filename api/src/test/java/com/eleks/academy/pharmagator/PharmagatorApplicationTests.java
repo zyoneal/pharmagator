@@ -11,8 +11,11 @@ class PharmagatorApplicationTests {
 
     @Test
     void contextLoads() {
-    }
+        }
 
 }
 
+<<<<<<< HEAD:api/src/test/java/com/eleks/academy/pharmagator/PharmagatorApplicationTests.java
 
+=======
+>>>>>>> development:api/src/test/java/com/eleks/academy/pharmagator/PharmaApplicationTests.java

@@ -1,5 +1,6 @@
 package com.eleks.academy.pharmagator.entities;
 
+<<<<<<< HEAD
 
 import com.eleks.academy.pharmagator.view.PharmacyRequest;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+=======
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+>>>>>>> development
 @Data
 @Entity
 @NoArgsConstructor
@@ -25,8 +34,11 @@ public class Pharmacy {
 
     private String medicineLinkTemplate;
 
+<<<<<<< HEAD
     public Pharmacy of(PharmacyRequest pharmacyRequest){
         return new Pharmacy(this.id,pharmacyRequest.getName(),pharmacyRequest.getMedicineLinkTemplate());
     }
 
+=======
+>>>>>>> development
 }
