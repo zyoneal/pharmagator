@@ -6,9 +6,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 
 @SpringBootTest
-
-class PharmaApplicationTests {
-
 @ActiveProfiles("test")
 class PharmagatorApplicationTests {
 
@@ -16,6 +13,5 @@ class PharmagatorApplicationTests {
     void contextLoads() {
         }
 
-    }
-
 }
+
