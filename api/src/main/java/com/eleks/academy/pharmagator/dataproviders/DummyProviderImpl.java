@@ -13,7 +13,6 @@ public class DummyProviderImpl implements DataProvider {
     @Override
     public Stream<MedicineDto> loadData() {
         return IntStream.rangeClosed(1, 100).mapToObj(this::buildDto);
-
     }
 
     private MedicineDto buildDto(int i) {
