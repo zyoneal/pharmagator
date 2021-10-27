@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,12 +19,14 @@ public class MedicineController {
 
     @GetMapping
     public List<MedicineResponse> getAllMedicines() {
-        return this.medicineService.getAllMedicines();
+        return this.medicineService.getAllMedicines().stream().map(MedicineResponse::of).collect(Collectors.toList());
     }
 
     @GetMapping("/{medicineId}")
     public ResponseEntity<MedicineResponse> getMedicineById(@PathVariable("medicineId") Long medicineId) {
-        return this.medicineService.getMedicine(medicineId);
+        return this.medicineService.getMedicine(medicineId).map(MedicineResponse::of)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{medicineId}")

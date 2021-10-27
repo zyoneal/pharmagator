@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class PriceController {
 
     @GetMapping
     public List<PriceResponse> getAllPrices() {
-        return this.priceService.getAllPrices();
+        return this.priceService.getAllPrices().stream().map(PriceResponse::of).collect(Collectors.toList());
     }
 
     @PostMapping
