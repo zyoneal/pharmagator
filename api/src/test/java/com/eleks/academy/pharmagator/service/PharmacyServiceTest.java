@@ -3,6 +3,7 @@ package com.eleks.academy.pharmagator.service;
 
 import com.eleks.academy.pharmagator.dao.PharmacyRepository;
 import com.eleks.academy.pharmagator.entities.Pharmacy;
+import com.eleks.academy.pharmagator.view.PharmacyRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +18,7 @@ import java.util.stream.LongStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PharmacyServiceTest {
@@ -42,7 +43,7 @@ class PharmacyServiceTest {
 
     @Test
     public void test_repoReturnsNull_NPE() {
-        when(pharmacyRepository.findAll())
+        when(this.pharmacyRepository.findAll())
                 .thenReturn(null);
 
         assertThatExceptionOfType(NullPointerException.class)
@@ -61,31 +62,54 @@ class PharmacyServiceTest {
     }
 
     @Test
-    public void test_findPharmacyById_repoReturnsNull_empty() {
+    public void test_findPharmacyById_empty() {
         Long id = 3L;
         when(this.pharmacyRepository.findById(id))
                 .thenReturn(Optional.empty());
-        Optional<Pharmacy> pharmacy = this.pharmacyService.getPharmacy(id);
+        final var pharmacy = this.pharmacyService.getPharmacy(id);
         assertThat(pharmacy).isEmpty();
     }
 
     @Test
     public void test_getAllPharmacies_ok() {
         Mockito.when(this.pharmacyRepository.findAll())
-                .thenReturn(LongStream.range(1L,100L)
-                        .mapToObj(i -> new Pharmacy(i,"",""))
+                .thenReturn(LongStream.range(1L, 100L)
+                        .mapToObj(i -> new Pharmacy(i, "", ""))
                         .collect(Collectors.toList()));
-        List<Pharmacy> allPharmacies = this.pharmacyService.getAllPharmacies();
-        assertThat(allPharmacies).isNotEmpty().matches(list -> list.size() == 100);
+        final var allPharmacies = this.pharmacyService.getAllPharmacies();
+        assertThat(allPharmacies).isNotEmpty().matches(list -> list.size() == 99);
     }
 
-//    @Test
-//    public void test_getAllPharmacies_repoReturnsNull_NPE() {
-//        Mockito.when(this.pharmacyRepository.findAll())
-//                .thenReturn(null);
-//        assertThatExceptionOfType(NullPointerException.class)
-//                .isThrownBy(() -> this.pharmacyService.getAllPharmacies());
-//    }
+    @Test
+    public void test_getAllPharmacies_empty() {
+        Mockito.when(this.pharmacyRepository.findAll())
+                .thenReturn(List.of());
+        final var pharmacies = this.pharmacyService.getAllPharmacies();
+        assertThat(pharmacies).matches(list -> list.size() == 0).isEmpty();
+    }
 
+    @Test
+    public void test_deletePharmacyById_ok() {
+        Pharmacy pharmacy = new Pharmacy(5L, "pharma1", "localhos1");
+        this.pharmacyService.deletePharmacy(pharmacy.getId());
+        verify(this.pharmacyRepository, times(1)).deleteById(pharmacy.getId());
+    }
+
+    @Test
+    public void test_deletePharmacyById_bad() {
+        Pharmacy pharmacy = new Pharmacy(5L, "pharma1", "localhos1");
+        this.pharmacyService.deletePharmacy(anyLong());
+        verify(this.pharmacyRepository, times(0)).deleteById(pharmacy.getId());
+    }
+
+    @Test
+    public void test_createOrUpdatePharmacy_ok() {
+        PharmacyRequest request = new PharmacyRequest("name", "medicineLink");
+        Pharmacy pharmacy = new Pharmacy();
+        Pharmacy pharmacyToSaveOrUpdate = pharmacy.of(request);
+        Mockito.when(this.pharmacyRepository.save(pharmacyToSaveOrUpdate)).thenReturn(pharmacyToSaveOrUpdate);
+        this.pharmacyService.createOrUpdate(request);
+        Mockito.verify(this.pharmacyRepository, times(1)).save(Mockito.any(Pharmacy.class));
+    }
 
 }

@@ -29,8 +29,8 @@ public class MedicineService {
 
     public void createOrUpdate(MedicineRequest medicineRequest) {
         Medicine medicineEntity = new Medicine();
-        medicineEntity.of(medicineRequest);
-        medicineRepository.save(medicineEntity);
+        Medicine medicineToSaveOrUpdate = medicineEntity.of(medicineRequest);
+        medicineRepository.save(medicineToSaveOrUpdate);
     }
 
 }

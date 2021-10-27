@@ -20,8 +20,8 @@ public class PriceService {
 
     public void saveOrUpdate(PriceRequest priceRequest) {
         Price priceEntity = new Price();
-        priceEntity.of(priceRequest);
-        this.priceRepository.save(priceEntity);
+        Price priceToSaveOrUpdate = priceEntity.of(priceRequest);
+        this.priceRepository.save(priceToSaveOrUpdate);
     }
 
 }

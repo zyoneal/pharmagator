@@ -30,8 +30,8 @@ public class PharmacyService {
 
     public void createOrUpdate(PharmacyRequest pharmacyRequest) {
         Pharmacy pharmacyEntity = new Pharmacy();
-        Pharmacy pharmacy = pharmacyEntity.of(pharmacyRequest);
-        this.pharmacyRepository.save(pharmacy);
+        Pharmacy pharmacyToSaveOrUpdate = pharmacyEntity.of(pharmacyRequest);
+        this.pharmacyRepository.save(pharmacyToSaveOrUpdate);
     }
 
     public List<Pharmacy> findAllEven(){

@@ -19,7 +19,8 @@ public class MedicineController {
 
     @GetMapping
     public List<MedicineResponse> getAllMedicines() {
-        return this.medicineService.getAllMedicines().stream().map(MedicineResponse::of).collect(Collectors.toList());
+        return this.medicineService.getAllMedicines()
+                .stream().map(MedicineResponse::of).collect(Collectors.toList());
     }
 
     @GetMapping("/{medicineId}")
