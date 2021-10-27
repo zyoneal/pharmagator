@@ -10,10 +10,10 @@ CREATE TABLE medicines (
 );
 
 CREATE TABLE prices (
-    pharmacy_id bigint,
-    medicine_id bigint,
+    pharmacy_id bigint REFERENCES pharmacies(id),
+    medicine_id bigint REFERENCES medicines(id),
     price decimal(10, 2) not null default 0,
     external_id varchar(100) not null,
     updated_at timestamp not null default now(),
-    PRIMARY KEY (pharmacy_id, medicine_id)
+    CONSTRAINT price_pkey PRIMARY KEY (pharmacy_id, medicine_id)
 );
