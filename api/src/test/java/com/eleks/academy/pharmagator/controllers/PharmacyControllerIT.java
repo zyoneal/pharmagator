@@ -47,18 +47,15 @@ public class PharmacyControllerIT {
 
             this.mockMvc.perform(MockMvcRequestBuilders.get("/pharmacies"))
                     .andExpect(MockMvcResultMatchers.status().isOk())
-                    .andExpect(jsonPath("$[*].id",
-                            Matchers.hasItems(2021102101, 2021102102)));
+                    .andExpect(jsonPath("$[*].id", Matchers.hasItems(2021102101, 2021102102)));
         } finally {
             this.dataSourceConnection.close();
         }
     }
 
     private IDataSet readDataset() throws DataSetException, IOException {
-        try (var resource = getClass()
-                .getResourceAsStream("PharmacyControllerIT_dataset.xml")) {
-            return new FlatXmlDataSetBuilder()
-                    .build(resource);
+        try (var resource = getClass().getResourceAsStream("PharmacyControllerIT_dataset.xml")) {
+            return new FlatXmlDataSetBuilder().build(resource);
         }
     }
 
