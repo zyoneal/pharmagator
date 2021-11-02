@@ -1,20 +1,20 @@
 package com.eleks.academy.pharmagator.service;
 
 
-import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
 import com.eleks.academy.pharmagator.entities.Pharmacy;
+import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
+import com.eleks.academy.pharmagator.services.PharmacyServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,7 +24,7 @@ class PharmacyServiceTest {
     private PharmacyRepository pharmacyRepository;
 
     @InjectMocks
-    private PharmacyService pharmacyService;
+    private PharmacyServiceImpl pharmacyService;
 
     @Test
     public void test_ok() {
@@ -34,18 +34,18 @@ class PharmacyServiceTest {
                         .collect(Collectors.toList())
                 );
 
-        final var evenPharmacies = this.pharmacyService.findAllEven();
-        assertThat(evenPharmacies).matches(list -> list.size() == 49).allMatch(record -> record.getId() % 2 == 0);
+        final var pharmacies = this.pharmacyService.findAll();
+        assertThat(pharmacies).isNotEmpty().matches(list -> list.size() == 99);
     }
 
     @Test
     public void test_repoReturnsNull_NPE() {
 
         when(pharmacyRepository.findAll())
-                .thenReturn(null);
+                .thenReturn(List.of());
 
-        assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> this.pharmacyService.findAllEven());
+        final var pharmacies = this.pharmacyService.findAll();
+        assertThat(pharmacies).isEmpty();
     }
 
 }
