@@ -1,20 +1,11 @@
 package com.eleks.academy.pharmagator.controllers;
 
-<<<<<<< HEAD
-import com.eleks.academy.pharmagator.service.PharmacyService;
-import com.eleks.academy.pharmagator.view.PharmacyResponse;
-import com.eleks.academy.pharmagator.view.PharmacyRequest;
+import com.eleks.academy.pharmagator.dataproviders.dto.input.PharmacyDto;
+import com.eleks.academy.pharmagator.entities.Pharmacy;
+import com.eleks.academy.pharmagator.services.PharmacyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-=======
-import com.eleks.academy.pharmagator.projections.PharmacyLight;
-import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
->>>>>>> development
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,43 +15,40 @@ import java.util.List;
 @RequestMapping("/pharmacies")
 public class PharmacyController {
 
-<<<<<<< HEAD
     private final PharmacyService pharmacyService;
 
     @GetMapping
-    public List<PharmacyResponse> getAllPharmacies() {
-        return this.pharmacyService.getAllPharmacies();
+    public List<Pharmacy> getAll() {
+        return this.pharmacyService.findAll();
     }
 
-    @GetMapping("/{pharmacyId}")
-    public ResponseEntity<PharmacyResponse> getPharmacyById(@PathVariable("pharmacyId") Long pharmacyId) {
-        return this.pharmacyService.getPharmacy(pharmacyId);
-    }
+    @GetMapping("/{id:[\\d]+}")
+    public ResponseEntity<Pharmacy> getById(@PathVariable Long id) {
 
-    @DeleteMapping("/{pharmacyId}")
-    public ResponseEntity<String> deletePharmacy(@PathVariable("pharmacyId") Long pharmacyId) {
-        this.pharmacyService.deletePharmacy(pharmacyId);
-        return ResponseEntity.ok("pharmacy id:" + pharmacyId + " was successfully deleted");
+        return this.pharmacyService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public void createPharmacy(@RequestBody PharmacyRequest pharmacyRequest) {
-        this.pharmacyService.createOrUpdate(pharmacyRequest);
+    public ResponseEntity<Pharmacy> create(@Valid @RequestBody PharmacyDto pharmacyDto) {
+        return ResponseEntity.ok(this.pharmacyService.save(pharmacyDto));
     }
 
-    @PutMapping
-    public void updatePharmacy(@Valid @RequestBody PharmacyRequest pharmacyRequest) {
-        this.pharmacyService.createOrUpdate(pharmacyRequest);
+    @PutMapping("/{id:[\\d]+}")
+    public ResponseEntity<Pharmacy> update(
+            @PathVariable Long id,
+            @Valid @RequestBody PharmacyDto pharmacyDto) {
+
+        return this.pharmacyService.update(id, pharmacyDto)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-=======
-    private final PharmacyRepository pharmacyRepository;
-
-    @GetMapping
-    public List<PharmacyLight> getAll() {
-        return this.pharmacyRepository.findAllLight();
+    @DeleteMapping("/{id:[\\d]+}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        this.pharmacyService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
->>>>>>> development
 }
-

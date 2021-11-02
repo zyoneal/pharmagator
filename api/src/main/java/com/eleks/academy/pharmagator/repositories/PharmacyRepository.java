@@ -1,4 +1,4 @@
-package com.eleks.academy.pharmagator.dao;
+package com.eleks.academy.pharmagator.repositories;
 
 import com.eleks.academy.pharmagator.entities.Pharmacy;
 import com.eleks.academy.pharmagator.projections.PharmacyLight;
@@ -11,10 +11,7 @@ import java.util.List;
 @Repository
 public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
 
-<<<<<<< HEAD:api/src/main/java/com/eleks/academy/pharmagator/dao/PharmacyRepository.java
-=======
     @Query("SELECT pharmacy FROM Pharmacy pharmacy")
     List<PharmacyLight> findAllLight();
 
->>>>>>> development:api/src/main/java/com/eleks/academy/pharmagator/repositories/PharmacyRepository.java
 }

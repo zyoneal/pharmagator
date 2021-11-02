@@ -1,7 +1,7 @@
 package com.eleks.academy.pharmagator.service;
 
 
-import com.eleks.academy.pharmagator.dao.PharmacyRepository;
+import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
 import com.eleks.academy.pharmagator.entities.Pharmacy;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

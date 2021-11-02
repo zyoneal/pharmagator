@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +18,5 @@ public class MedicineDto {
     private BigDecimal price;
 
     private String externalId;
-
-    private Instant updatedAt;
 
 }
