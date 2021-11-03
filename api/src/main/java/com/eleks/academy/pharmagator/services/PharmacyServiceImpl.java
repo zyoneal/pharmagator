@@ -15,7 +15,12 @@ import java.util.Optional;
 public class PharmacyServiceImpl implements PharmacyService {
 
     private final PharmacyRepository pharmacyRepository;
-    private final ModelMapper modelMapper;
+
+    private ModelMapper modelMapper;
+
+    public void setMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public List<Pharmacy> findAll() {
