@@ -121,5 +121,4 @@ class PharmacyServiceTest {
         verify(pharmacyRepository, times(1)).save(Mockito.any(Pharmacy.class));
     }
 
-
 }
