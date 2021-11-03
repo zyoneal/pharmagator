@@ -15,7 +15,7 @@ import java.util.Optional;
 public class MedicineServiceImpl implements MedicineService {
 
     private final MedicineRepository medicineRepository;
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Override
     public List<Medicine> findAll() {
@@ -45,6 +45,10 @@ public class MedicineServiceImpl implements MedicineService {
 
     public void delete(Long id) {
         medicineRepository.deleteById(id);
+    }
+
+    public void setMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 
 }
