@@ -11,7 +11,6 @@ class PharmagatorApplicationTests {
 
     @Test
     void contextLoads() {
-        }
+    }
 
 }
-
