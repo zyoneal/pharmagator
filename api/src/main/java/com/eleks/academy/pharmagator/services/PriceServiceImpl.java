@@ -21,7 +21,11 @@ public class PriceServiceImpl implements PriceService {
     private final MedicineRepository medicineRepository;
     private final PharmacyRepository pharmacyRepository;
 
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
+
+    public void setMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public List<Price> findAll() {
