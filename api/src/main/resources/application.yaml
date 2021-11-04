@@ -3,9 +3,10 @@ spring:
     url: jdbc:postgresql:pharmagator
     username: postgres
     password: postgres
-    jpa:
-      hibernate:
-        ddl-auto: validate
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
 
 pharmagator:
   data-providers:
@@ -17,4 +18,4 @@ pharmagator:
       url: https://anc.ua/productbrowser/v2/ua
       category-fetch-url: /categories
       page-size: 400
-
+      
