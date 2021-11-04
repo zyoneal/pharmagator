@@ -13,8 +13,8 @@ public class DataProvidersConfig {
     @Value("${pharmagator.data-providers.apteka-ds.url}")
     private String pharmacyDSBaseUrl;
 
-    @Value("${pharmagator.data-providers.apteka-liki24.url}")
-    private String pharmacyLiki24BaseUrl;
+    @Value("${pharmagator.data-providers.pharmacy-anc.url}")
+    private String pharmacyANCBaseUrl;
 
     @Bean(name = "pharmacyDSWebClient")
     public WebClient pharmacyDSWebClient() {
@@ -25,12 +25,12 @@ public class DataProvidersConfig {
                 .build();
     }
 
-    @Bean(name = "pharmacyLiki24WebClient")
-    public WebClient pharmacyLiki24WebClient() {
+    @Bean(name = "pharmacyANCWebClient")
+    public WebClient pharmacyANCWebClient() {
         return WebClient.builder()
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .baseUrl(pharmacyLiki24BaseUrl)
+                .baseUrl(pharmacyANCBaseUrl)
                 .build();
     }
 
