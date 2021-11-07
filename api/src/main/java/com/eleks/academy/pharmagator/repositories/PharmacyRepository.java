@@ -14,4 +14,6 @@ public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
     @Query("SELECT pharmacy FROM Pharmacy pharmacy")
     List<PharmacyLight> findAllLight();
 
+    Pharmacy findByName(String name);
+
 }

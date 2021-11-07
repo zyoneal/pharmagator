@@ -1,5 +1,7 @@
 package com.eleks.academy.pharmagator.services;
 
+import com.eleks.academy.pharmagator.exceptions.MedicineAlreadyExistException;
+import com.eleks.academy.pharmagator.exceptions.MedicineNotFoundException;
 import com.eleks.academy.pharmagator.dataproviders.dto.input.MedicineDto;
 import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.repositories.MedicineRepository;
@@ -18,19 +20,25 @@ public class MedicineServiceImpl implements MedicineService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<Medicine> findAll() {
-        return medicineRepository.findAll();
+    public List<Medicine> findAll() throws MedicineNotFoundException {
+        List<Medicine> medicines = medicineRepository.findAll();
+        if (medicines.isEmpty()) {
+            throw new MedicineNotFoundException("The drug list is empty");
+        }
+        return medicines;
     }
 
     @Override
-    public Optional<Medicine> findById(Long id) {
-        return medicineRepository.findById(id);
+    public Medicine findById(Long id){
+        return medicineRepository.findById(id).get();
     }
 
     @Override
-    public Medicine save(MedicineDto medicineDto) {
-        Medicine medicine = modelMapper.map(medicineDto, Medicine.class);
-        return medicineRepository.save(medicine);
+    public Medicine save(MedicineDto medicineDto) throws MedicineAlreadyExistException {
+        if (medicineRepository.findByTitle(medicineDto.getTitle()) != null) {
+            throw new MedicineAlreadyExistException("A drug with this name already exists");
+        }
+        return medicineRepository.save(modelMapper.map(medicineDto,Medicine.class));
     }
 
     @Override
@@ -43,8 +51,9 @@ public class MedicineServiceImpl implements MedicineService {
                 });
     }
 
-    public void delete(Long id) {
+    public Long delete(Long id) {
         medicineRepository.deleteById(id);
+        return id;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.eleks.academy.pharmagator.services;
 
+import com.eleks.academy.pharmagator.exceptions.MedicineAlreadyExistException;
+import com.eleks.academy.pharmagator.exceptions.MedicineNotFoundException;
 import com.eleks.academy.pharmagator.dataproviders.dto.input.MedicineDto;
 import com.eleks.academy.pharmagator.entities.Medicine;
 
@@ -8,14 +10,14 @@ import java.util.Optional;
 
 public interface MedicineService {
 
-    List<Medicine> findAll();
+    List<Medicine> findAll() throws MedicineNotFoundException;
 
-    Optional<Medicine> findById(Long id);
+    Medicine findById(Long id);
 
-    Medicine save(MedicineDto medicineDto);
+    Medicine save(MedicineDto medicineDto) throws MedicineAlreadyExistException;
 
     Optional<Medicine> update(Long id, MedicineDto medicineDto);
 
-    void delete(Long id);
+    Long delete(Long id);
 
 }
