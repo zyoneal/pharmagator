@@ -1,5 +1,6 @@
 package com.eleks.academy.pharmagator.dataproviders.dto.input;
 
+import com.eleks.academy.pharmagator.entities.Price;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -12,5 +13,19 @@ public class PriceDto {
     private BigDecimal price;
 
     private String externalId;
+
+    public static PriceDto toDto(Price price) {
+        PriceDto priceDto = new PriceDto();
+        priceDto.setPrice(price.getPrice());
+        priceDto.setExternalId(price.getExternalId());
+        return priceDto;
+    }
+
+    public static Price toEntity(PriceDto priceDto) {
+        Price price = new Price();
+        price.setPrice(priceDto.getPrice());
+        price.setExternalId(priceDto.getExternalId());
+        return price;
+    }
 
 }

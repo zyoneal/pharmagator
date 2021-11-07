@@ -4,7 +4,6 @@ import com.eleks.academy.pharmagator.dataproviders.dto.input.PharmacyDto;
 import com.eleks.academy.pharmagator.entities.Pharmacy;
 import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +14,6 @@ import java.util.Optional;
 public class PharmacyServiceImpl implements PharmacyService {
 
     private final PharmacyRepository pharmacyRepository;
-
-    private ModelMapper modelMapper;
-
-    public void setMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public List<Pharmacy> findAll() {
@@ -34,7 +27,7 @@ public class PharmacyServiceImpl implements PharmacyService {
 
     @Override
     public Pharmacy save(PharmacyDto pharmacyDto) {
-        Pharmacy pharmacy = modelMapper.map(pharmacyDto, Pharmacy.class);
+        Pharmacy pharmacy = PharmacyDto.toEntity(pharmacyDto);
         return pharmacyRepository.save(pharmacy);
     }
 
@@ -42,7 +35,7 @@ public class PharmacyServiceImpl implements PharmacyService {
     public Optional<Pharmacy> update(Long id, PharmacyDto pharmacyDto) {
         return pharmacyRepository.findById(id)
                 .map(ph ->{
-                    Pharmacy pharmacy = modelMapper.map(pharmacyDto, Pharmacy.class);
+                    Pharmacy pharmacy = PharmacyDto.toEntity(pharmacyDto);
                     pharmacy.setId(id);
                     return pharmacyRepository.save(pharmacy);
                 });

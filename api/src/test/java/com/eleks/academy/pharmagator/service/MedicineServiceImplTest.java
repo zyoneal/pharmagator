@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,19 +30,15 @@ public class MedicineServiceImplTest {
     @InjectMocks
     private MedicineServiceImpl medicineService;
 
-    private ModelMapper modelMapper;
-
     private Medicine testMedicine;
 
     private MedicineDto testMedicineDto;
 
     @BeforeEach
     public void init() {
-        this.modelMapper = new ModelMapper();
-        this.medicineService.setMapper(this.modelMapper);
         this.testMedicine = new Medicine(20211103L,"title");
-        this.testMedicineDto = new MedicineDto();
-        this.testMedicineDto.setTitle("testDtoTitle");
+        testMedicineDto = new MedicineDto();
+        testMedicineDto.setTitle("testMedicineDto");
     }
 
     @Test
@@ -100,7 +95,7 @@ public class MedicineServiceImplTest {
 
     @Test
     public void test_save_ok() {
-        Medicine medicine = this.modelMapper.map(this.testMedicineDto, Medicine.class);
+        Medicine medicine = MedicineDto.toEntity(this.testMedicineDto);
         when(this.medicineRepository.save(medicine)).thenReturn(medicine);
         this.medicineService.save(this.testMedicineDto);
         verify(this.medicineRepository, times(1)).save(Mockito.any(Medicine.class));
@@ -108,12 +103,12 @@ public class MedicineServiceImplTest {
 
     @Test
     public void test_update_ok() {
-        when(medicineRepository.findById(Mockito.anyLong())).thenReturn(Optional.ofNullable(testMedicine));
-        when(medicineRepository.save(Mockito.any(Medicine.class))).thenReturn(testMedicine);
-        MedicineDto dto = this.modelMapper.map(testMedicine, MedicineDto.class);
-        final var medicine = medicineService.update(Mockito.anyLong(), dto);
-        verify(medicineRepository, times(1)).findById(Mockito.anyLong());
-        verify(medicineRepository, times(1)).save(Mockito.any(Medicine.class));
+        when(this.medicineRepository.findById(Mockito.anyLong())).thenReturn(Optional.ofNullable(this.testMedicine));
+        when(this.medicineRepository.save(Mockito.any(Medicine.class))).thenReturn(this.testMedicine);
+        MedicineDto dto = MedicineDto.toDto(this.testMedicine);
+        final var medicine = this.medicineService.update(Mockito.anyLong(), dto);
+        verify(this.medicineRepository, times(1)).findById(Mockito.anyLong());
+        verify(this.medicineRepository, times(1)).save(Mockito.any(Medicine.class));
     }
 
 }

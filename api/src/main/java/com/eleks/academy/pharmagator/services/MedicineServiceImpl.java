@@ -4,7 +4,6 @@ import com.eleks.academy.pharmagator.dataproviders.dto.input.MedicineDto;
 import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.repositories.MedicineRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Optional;
 public class MedicineServiceImpl implements MedicineService {
 
     private final MedicineRepository medicineRepository;
-    private ModelMapper modelMapper;
 
     @Override
     public List<Medicine> findAll() {
@@ -29,7 +27,7 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Medicine save(MedicineDto medicineDto) {
-        Medicine medicine = modelMapper.map(medicineDto, Medicine.class);
+        Medicine medicine = MedicineDto.toEntity(medicineDto);
         return medicineRepository.save(medicine);
     }
 
@@ -37,7 +35,7 @@ public class MedicineServiceImpl implements MedicineService {
     public Optional<Medicine> update(Long id, MedicineDto medicineDto) {
         return medicineRepository.findById(id)
                 .map(source -> {
-                    Medicine medicine = modelMapper.map(medicineDto, Medicine.class);
+                    Medicine medicine = MedicineDto.toEntity(medicineDto);
                     medicine.setId(id);
                     return medicineRepository.save(medicine);
                 });
@@ -45,10 +43,6 @@ public class MedicineServiceImpl implements MedicineService {
 
     public void delete(Long id) {
         medicineRepository.deleteById(id);
-    }
-
-    public void setMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
     }
 
 }

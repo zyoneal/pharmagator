@@ -7,7 +7,6 @@ import com.eleks.academy.pharmagator.repositories.MedicineRepository;
 import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
 import com.eleks.academy.pharmagator.repositories.PriceRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,12 +19,6 @@ public class PriceServiceImpl implements PriceService {
     private final PriceRepository priceRepository;
     private final MedicineRepository medicineRepository;
     private final PharmacyRepository pharmacyRepository;
-
-    private ModelMapper modelMapper;
-
-    public void setMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public List<Price> findAll() {
@@ -40,7 +33,7 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public Price save(PriceDto priceDto) {
-        Price price = modelMapper.map(priceDto, Price.class);
+        Price price = PriceDto.toEntity(priceDto);
         return priceRepository.save(price);
     }
 
@@ -51,7 +44,7 @@ public class PriceServiceImpl implements PriceService {
 
         return this.priceRepository.findById(priceId)
                 .map(source -> {
-                    Price price = modelMapper.map(priceDto, Price.class);
+                    Price price = PriceDto.toEntity(priceDto);
                     price.setPharmacyId(pharmacyId);
                     price.setMedicineId(medicineId);
                     return priceRepository.save(price);
