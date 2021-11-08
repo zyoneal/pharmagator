@@ -1,15 +1,14 @@
 package com.eleks.academy.pharmagator.controllers;
 
-import com.eleks.academy.pharmagator.dataproviders.dto.input.PriceDto;
-import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.entities.Price;
 import com.eleks.academy.pharmagator.services.PriceService;
+import com.eleks.academy.pharmagator.view.requests.PriceRequest;
+import com.eleks.academy.pharmagator.view.responses.PriceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -35,26 +34,23 @@ public class PriceController {
     }
 
     @PostMapping
-    public Price create(@Valid @RequestBody PriceDto priceDto) {
-        return this.priceService.save(priceDto);
+    public Price create(@Valid @RequestBody PriceRequest priceRequest) {
+        return this.priceService.save(priceRequest);
     }
 
     @PostMapping("/pharmacyId/{pharmacyId:[\\d]+}/medicineId/{medicineId:[\\d]+}")
     public ResponseEntity<Price> update(
-            @Valid @RequestBody PriceDto priceDto,
+            @Valid @RequestBody PriceRequest priceRequest,
             @PathVariable Long pharmacyId,
             @PathVariable Long medicineId) {
 
-        return this.priceService.update(pharmacyId, medicineId, priceDto)
+        return this.priceService.update(pharmacyId, medicineId, priceRequest)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/pharmacyId/{pharmacyId:[\\d]+}/medicineId/{medicineId:[\\d]+}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long pharmacyId,
-            @PathVariable Long medicineId) {
-
+    public ResponseEntity<?> delete(@PathVariable Long pharmacyId, @PathVariable Long medicineId) {
         this.priceService.deleteById(pharmacyId, medicineId);
         return ResponseEntity.noContent().build();
     }

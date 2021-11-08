@@ -1,10 +1,10 @@
 package com.eleks.academy.pharmagator.controllers;
 
+import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.exceptions.MedicineAlreadyExistException;
 import com.eleks.academy.pharmagator.exceptions.MedicineNotFoundException;
-import com.eleks.academy.pharmagator.dataproviders.dto.input.MedicineDto;
-import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.services.MedicineService;
+import com.eleks.academy.pharmagator.view.requests.MedicineRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,9 +39,9 @@ public class MedicineController {
     }
 
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody MedicineDto medicineDto) {
+    public ResponseEntity create(@Valid @RequestBody MedicineRequest medicineRequest) {
         try {
-            medicineService.save(medicineDto);
+            medicineService.save(medicineRequest);
             return ResponseEntity.ok("Medicine saved success");
         } catch (MedicineAlreadyExistException e) {
             return ResponseEntity.badRequest().body(e);
@@ -53,8 +53,8 @@ public class MedicineController {
     @PutMapping("/{id:[\\d]+}")
     public ResponseEntity<Medicine> update(
             @PathVariable Long id,
-            @Valid @RequestBody MedicineDto medicineDto) {
-        return this.medicineService.update(id, medicineDto)
+            @Valid @RequestBody MedicineRequest medicineRequest) {
+        return this.medicineService.update(id, medicineRequest)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

@@ -1,10 +1,10 @@
 package com.eleks.academy.pharmagator.controllers;
 
-import com.eleks.academy.pharmagator.dataproviders.dto.input.PharmacyDto;
 import com.eleks.academy.pharmagator.entities.Pharmacy;
 import com.eleks.academy.pharmagator.exceptions.PharmacyAlreadyExistException;
 import com.eleks.academy.pharmagator.exceptions.PharmacyNotFoundException;
 import com.eleks.academy.pharmagator.services.PharmacyService;
+import com.eleks.academy.pharmagator.view.requests.PharmacyRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,9 +39,9 @@ public class PharmacyController {
     }
 
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody PharmacyDto pharmacyDto) {
+    public ResponseEntity create(@Valid @RequestBody PharmacyRequest pharmacyRequest) {
         try {
-            return ResponseEntity.ok(pharmacyService.save(pharmacyDto));
+            return ResponseEntity.ok(pharmacyService.create(pharmacyRequest));
         } catch (PharmacyAlreadyExistException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
@@ -52,9 +52,9 @@ public class PharmacyController {
     @PutMapping("/{id:[\\d]+}")
     public ResponseEntity<Pharmacy> update(
             @PathVariable Long id,
-            @Valid @RequestBody PharmacyDto pharmacyDto) {
+            @Valid @RequestBody PharmacyRequest pharmacyRequest) {
 
-        return this.pharmacyService.update(id, pharmacyDto)
+        return this.pharmacyService.update(id, pharmacyRequest)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
