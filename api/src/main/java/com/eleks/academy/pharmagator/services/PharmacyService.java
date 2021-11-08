@@ -1,22 +1,23 @@
 package com.eleks.academy.pharmagator.services;
 
-import com.eleks.academy.pharmagator.dataproviders.dto.input.PharmacyDto;
 import com.eleks.academy.pharmagator.entities.Pharmacy;
 import com.eleks.academy.pharmagator.exceptions.PharmacyAlreadyExistException;
 import com.eleks.academy.pharmagator.exceptions.PharmacyNotFoundException;
+import com.eleks.academy.pharmagator.view.requests.PharmacyRequest;
+import com.eleks.academy.pharmagator.view.responses.PharmacyResponse;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PharmacyService {
 
-    List<Pharmacy> findAll() throws PharmacyNotFoundException;
+    List<PharmacyResponse> findAll() throws PharmacyNotFoundException;
 
-    Pharmacy findById(Long id);
+    PharmacyResponse findById(Long id);
 
-    Pharmacy save(PharmacyDto pharmacyDto) throws PharmacyAlreadyExistException;
+    PharmacyResponse create(PharmacyRequest pharmacyDto) throws PharmacyAlreadyExistException;
 
-    Optional<Pharmacy> update(Long id, PharmacyDto pharmacyDto);
+    Optional<Pharmacy> update(Long id, PharmacyRequest pharmacyDto);
 
     Long deleteById(Long id);
 
