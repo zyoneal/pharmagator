@@ -8,6 +8,7 @@ import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+
 @EnableScheduling
 public class PharmagatorApplication {
 

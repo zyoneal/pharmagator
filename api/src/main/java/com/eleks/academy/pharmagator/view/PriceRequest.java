@@ -1,4 +1,4 @@
-package com.eleks.academy.pharmagator.dataproviders.dto.ds;
+package com.eleks.academy.pharmagator.view;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,14 +9,8 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DSMedicineDto {
-
-    private String id;
-
-    private String name;
+public class PriceRequest {
 
     private BigDecimal price;
-
-    private String manufacturer;
 
 }
