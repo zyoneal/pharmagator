@@ -19,4 +19,6 @@ public class MedicineDto {
     @Parsed(field = "link")
     private String externalId;
 
+    private String pharmacyName;
+
 }
