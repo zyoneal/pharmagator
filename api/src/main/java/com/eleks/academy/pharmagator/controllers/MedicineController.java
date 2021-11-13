@@ -4,12 +4,13 @@ import com.eleks.academy.pharmagator.dataproviders.dto.input.MedicineDto;
 import com.eleks.academy.pharmagator.services.MedicineService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/medicines")
@@ -17,13 +18,13 @@ import java.util.stream.Collectors;
 public class MedicineController {
 
     private final MedicineService medicineService;
+
     private final ModelMapper modelMapper;
 
-    @GetMapping
-    public List<MedicineDto> getAll() {
-        return medicineService.findAll().stream()
-                .map(medicine -> modelMapper.map(medicine, MedicineDto.class))
-                .collect(Collectors.toList());
+    @GetMapping ResponseEntity<Page<MedicineDto>> getAll(@RequestParam(value = "page", required = false,defaultValue = "0") int page,
+                                                         @RequestParam(value = "size",required = false,defaultValue = "10") int size) {
+        Pageable paging = PageRequest.of(page, size);
+        return ResponseEntity.ok(medicineService.getAll(paging));
     }
 
     @GetMapping("/{id:[\\d]+}")
@@ -34,8 +35,8 @@ public class MedicineController {
     }
 
     @PostMapping
-    public MedicineDto create(@Valid @RequestBody MedicineDto medicineDto) {
-        return modelMapper.map(medicineService.save(medicineDto), MedicineDto.class);
+    public ResponseEntity<MedicineDto> create(@Valid @RequestBody MedicineDto medicineDto) {
+        return ResponseEntity.ok(modelMapper.map(medicineService.save(medicineDto), MedicineDto.class));
     }
 
     @PutMapping("/{id:[\\d]+}")
