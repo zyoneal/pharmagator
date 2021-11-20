@@ -41,4 +41,5 @@ public record AdvancedSearchViewSpecification(AdvancedSearchRequest request) imp
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
+
 }

@@ -19,11 +19,17 @@ import java.math.BigDecimal;
 @Immutable
 @IdClass(PriceId.class)
 public class AdvancedSearchView {
+
     @Id
     private Long pharmacyId;
+
     @Id
     private Long medicineId;
+
     private BigDecimal price;
+
     private String pharmacy;
+
     private String medicine;
+
 }

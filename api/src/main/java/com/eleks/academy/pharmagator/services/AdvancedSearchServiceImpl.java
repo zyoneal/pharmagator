@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AdvancedSearchServiceImpl implements AdvancedSearchService {
+
     private final AdvancedSearchViewRepository repository;
 
     @Override
@@ -20,4 +21,5 @@ public class AdvancedSearchServiceImpl implements AdvancedSearchService {
 
         return repository.findAll(specification, pageable);
     }
+
 }

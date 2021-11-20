@@ -11,8 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdvancedSearchRequest {
+
     private List<String> pharmacies;
     private String medicine;
     private BigDecimal priceFrom;
     private BigDecimal priceTo;
+
 }

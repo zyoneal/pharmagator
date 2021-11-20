@@ -6,5 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface AdvancedSearchService {
+
     Page<AdvancedSearchView> search(AdvancedSearchRequest request, Pageable pageable);
+
 }

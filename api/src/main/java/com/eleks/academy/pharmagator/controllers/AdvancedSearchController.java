@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/search")
 public class AdvancedSearchController {
+
     private final AdvancedSearchService advancedSearchService;
+
     @GetMapping
-    public Page<AdvancedSearchView> search(@ModelAttribute AdvancedSearchRequest request, @PageableDefault(size = 20, sort = "medicine") Pageable pageable) {
+    public Page<AdvancedSearchView> search(@ModelAttribute AdvancedSearchRequest request,
+                                           @PageableDefault(size = 20, sort = "medicine") Pageable pageable) {
         return advancedSearchService.search(request, pageable);
     }
+
 }

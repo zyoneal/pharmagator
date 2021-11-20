@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdvancedSearchViewRepository extends JpaRepository<AdvancedSearchView, PriceId>, JpaSpecificationExecutor<AdvancedSearchView> {
+public interface AdvancedSearchViewRepository extends JpaRepository<AdvancedSearchView, PriceId>,
+                                                      JpaSpecificationExecutor<AdvancedSearchView> {
 }
