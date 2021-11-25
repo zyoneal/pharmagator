@@ -86,13 +86,13 @@ public class MedicineControllerTest {
 
     @Test
     public void DeleteById_ShouldDeleteMedicine() throws Exception {
-        doNothing().when(medicineService).delete(medicine.getId());
+        doNothing().when(medicineService).deleteById(medicine.getId());
 
         mockMvc.perform(delete(URI + "/" + medicine.getId()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent())
                 .andDo(MockMvcResultHandlers.print());
 
-        verify(medicineService, times(1)).delete(anyLong());
+        verify(medicineService, times(1)).deleteById(anyLong());
     }
 
     @Test
