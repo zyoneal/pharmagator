@@ -46,9 +46,6 @@ dependencies {
     implementation 'org.flywaydb:flyway-core:7.15.0'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'org.modelmapper:modelmapper:2.4.4'
-<<<<<<< HEAD
-    implementation 'com.univocity:univocity-parsers:2.9.1'
-=======
     implementation 'org.apache.poi:poi:5.1.0'
     implementation 'org.apache.poi:poi-ooxml:5.1.0'
     implementation 'com.univocity:univocity-parsers:2.9.1'
@@ -56,7 +53,6 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:4.1.0'
 
     // Lombok
->>>>>>> 1813669471a97ed9089e76a1d3247bb0144d46f7
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
@@ -66,15 +62,11 @@ dependencies {
     testImplementation 'org.dbunit:dbunit:2.7.2'
 }
 
-
 test {
     useJUnitPlatform()
     testLogging {
         events = ["passed", "skipped", "failed"]
     }
-<<<<<<< HEAD
-}
-=======
     finalizedBy jacocoTestReport
 }
 
@@ -101,4 +93,3 @@ jacocoTestCoverageVerification {
     }
 
 }
->>>>>>> 1813669471a97ed9089e76a1d3247bb0144d46f7
