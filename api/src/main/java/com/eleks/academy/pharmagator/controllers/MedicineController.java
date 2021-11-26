@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/medicines")
@@ -24,7 +23,7 @@ public class MedicineController {
     public List<MedicineDto> getAll() {
         return medicineService.findAll().stream()
                 .map(medicine -> modelMapper.map(medicine, MedicineDto.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @GetMapping("/{id:[\\d]+}")
@@ -50,7 +49,7 @@ public class MedicineController {
     }
 
     @DeleteMapping("/{id:[\\d]+}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<MedicineDto> delete(@PathVariable Long id) {
         medicineService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

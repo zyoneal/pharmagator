@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/prices")
@@ -24,7 +23,7 @@ public class PriceController {
     public List<PriceDto> getAll() {
         return priceService.findAll().stream()
                 .map(price -> modelMapper.map(price, PriceDto.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @GetMapping("/pharmacyId/{pharmacyId:[\\d]+}/medicineId/{medicineId:[\\d]+}")
@@ -49,7 +48,7 @@ public class PriceController {
     }
 
     @DeleteMapping("/pharmacyId/{pharmacyId:[\\d]+}/medicineId/{medicineId:[\\d]+}")
-    public ResponseEntity<?> delete(
+    public ResponseEntity<PriceDto> delete(
             @PathVariable Long pharmacyId,
             @PathVariable Long medicineId) {
 
