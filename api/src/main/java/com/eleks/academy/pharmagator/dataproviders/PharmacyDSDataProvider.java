@@ -35,10 +35,10 @@ public class PharmacyDSDataProvider implements DataProvider {
     @Value("${pharmagator.data-providers.apteka-ds.pharmacy-name}")
     private String pharmacyName;
 
-    @Value("${pharmagator.data-providers.apteka-ds.limiting-pages}")
+    @Value("${pharmagator.data-providers.apteka-ds.page-limit}")
     private Long pageLimit;
 
-    @Value("${pharmagator.data-providers.apteka-ds.limiting-products-per-page}")
+    @Value("${pharmagator.data-providers.apteka-ds.products-per-page-limit}")
     private Long productsPerPageLimit;
 
     @Override

@@ -26,8 +26,8 @@ pharmagator:
       category-fetch-url: /category-menu
       category-path: /cat-prods-by-page
       pharmacy-name: apteka-ds
-      limiting-pages: 1
-      limiting-products-per-page: 50
+      page-limit: 1
+      products-per-page-limit: 50
     pharmacy-anc:
       url: https://anc.ua/productbrowser/v2/ua
       category-fetch-url: /categories
@@ -37,6 +37,7 @@ pharmagator:
       url: https://liki24.com/vnext/api/catalogue/8000001/products
       initial-page-index: 1
       pharmacy-name: apteka-liki24
+      page-limit: 5
     apteka-rozetka:
       url: https://xl-catalog-api.rozetka.com.ua/v4
       product-ids-fetch-url: /goods/get
