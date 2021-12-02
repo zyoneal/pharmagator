@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <title>New medicine</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<form th:method="POST" th:action="@{/ui}" th:object="${med}">
+    <label for="title">Enter medicine title:</label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <label for="price">Enter price for this mdicine:</label>
+    <input type="number" step="any" th:field="*{price}" id="price"/>
+    <label for="pharmacyName">Enter pharmacy name for this medicine:</label>
+    <input type="text" th:field="*{pharmacyName}" id="pharmacyName"/>
+    <label for="externalId">Enter externalId:</label>
+    <input type="text" th:field="*{externalId}" id="externalId"/>
+    <br/>
+    <input type="submit" value="Create!"/>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

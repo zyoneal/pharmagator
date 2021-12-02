@@ -16,13 +16,20 @@
 
     <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav mr-auto">
-                        <li class="nav-item" th:class="${#httpServletRequest.requestURI.contains('price')} ? 'nav-link active' : 'nav-link'">
-<!--            <li class="nav-item" th:class="${activePage == 'price'} ? 'nav-item active' : 'nav-item'">-->
+            <li class="nav-item"
+                th:class="${#httpServletRequest.requestURI.contains('price')} ? 'nav-link active' : 'nav-link'">
+                <!--            <li class="nav-item" th:class="${activePage == 'price'} ? 'nav-item active' : 'nav-item'">-->
                 <a class="nav-link" th:href="@{/ui/price}">Price<span class="sr-only">(current)</span></a>
             </li>
-                        <li class="nav-item" th:class="${#httpServletRequest.requestURI.contains('medicine')} ? 'nav-link active' : 'nav-link'">
-<!--            <li class="nav-item" th:class="${activePage == 'medicine'} ? 'nav-item active' : 'nav-item'">-->
+            <li class="nav-item"
+                th:class="${#httpServletRequest.requestURI.contains('medicine')} ? 'nav-link active' : 'nav-link'">
+                <!--            <li class="nav-item" th:class="${activePage == 'medicine'} ? 'nav-item active' : 'nav-item'">-->
                 <a class="nav-link" th:href="@{/ui/medicine}">Medicine</a>
+            </li>
+            <li class="nav-item"
+                th:class="${#httpServletRequest.requestURI.contains('addmedicine')} ? 'nav-link active' : 'nav-link'">
+                <!--            <li class="nav-item" th:class="${activePage == 'addmedicine'} ? 'nav-item active' : 'nav-item'">-->
+                <a class="nav-link" th:href="@{/ui/addmedicine}">Add new Medicine</a>
             </li>
         </ul>
     </div>
