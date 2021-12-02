@@ -48,7 +48,7 @@ class ImportServiceImplTest {
         medicineDto.setPharmacyName("pharmacy-anc");
         medicineDto.setTitle("Aspirin");
         medicineDto.setExternalId("ExternalID");
-        medicineDto.setPrice(new BigDecimal("25.25"));
+        medicineDto.setMedicinePrice(new BigDecimal("25.25"));
     }
 
     @AfterEach
@@ -66,9 +66,9 @@ class ImportServiceImplTest {
         pharmacyRepository.findByName(medicineDto.getPharmacyName())
                 .ifPresent(pharmacy -> assertEquals(pharmacy.getName(), medicineDto.getPharmacyName()));
 
-        priceRepository.findByPrice(medicineDto.getPrice())
+        priceRepository.findByMedicinePrice(medicineDto.getMedicinePrice())
                 .ifPresent(price -> {
-                    assertEquals(price.getPrice(), medicineDto.getPrice());
+                    assertEquals(price.getMedicinePrice(), medicineDto.getMedicinePrice());
                     assertEquals(price.getExternalId(), medicineDto.getExternalId());
                 });
     }

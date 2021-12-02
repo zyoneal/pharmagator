@@ -35,7 +35,7 @@ class ApiMedicineDtoConverterTest {
 
         MedicineDto medicineDto = subject.toMedicineDto(aptslavMedicineDto);
 
-        assertEquals(expectedPriceDto.getMin(), medicineDto.getPrice());
+        assertEquals(expectedPriceDto.getMin(), medicineDto.getMedicinePrice());
 
         assertEquals(String.valueOf(expectedId), medicineDto.getExternalId());
 

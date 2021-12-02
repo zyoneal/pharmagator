@@ -73,13 +73,13 @@ class PriceControllerTest {
     @BeforeAll
     static void setUpComponents() {
         price1 = new Price();
-        price1.setPrice(BigDecimal.valueOf(PRICE));
+        price1.setMedicinePrice(BigDecimal.valueOf(PRICE));
         price1.setPharmacyId(PHARMACY_ID);
         price1.setMedicineId(MEDICINE_ID);
         price1.setExternalId(EXTERNAL_ID);
 
         price2 = new Price();
-        price2.setPrice(BigDecimal.valueOf(PRICE));
+        price2.setMedicinePrice(BigDecimal.valueOf(PRICE));
         price2.setPharmacyId(2L);
         price2.setMedicineId(MEDICINE_ID);
         price2.setExternalId(EXTERNAL_ID);

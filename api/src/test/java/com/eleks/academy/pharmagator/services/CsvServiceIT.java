@@ -73,7 +73,7 @@ class CsvServiceIT {
                 .flatMap(medicine -> pharmacyRepository.findByName(record.getString(3))
                         .flatMap(pharmacy -> priceRepository.findById(new PriceId(pharmacy.getId(), medicine.getId()))))
                 .ifPresent(price -> {
-                    assertEquals(price.getPrice(), record.getBigDecimal(1));
+                    assertEquals(price.getMedicinePrice(), record.getBigDecimal(1));
                     assertEquals(price.getExternalId(), record.getString(2));
                 }));
     }

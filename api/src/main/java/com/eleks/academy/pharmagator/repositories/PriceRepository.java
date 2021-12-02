@@ -12,11 +12,11 @@ import java.util.Optional;
 
 public interface PriceRepository extends JpaRepository<Price, PriceId> {
     @Query("""
-            SELECT p.price as price, m.title as title, p.pharmacyId as pharmacyId
+            SELECT p.medicinePrice as medicinePrice, m.title as title, p.pharmacyId as pharmacyId
             FROM Price p
             LEFT JOIN Medicine m ON m.id = p.medicineId
             """)
     List<MedicinePrice> findAllMedicinesPrices();
 
-    Optional<Price> findByPrice(BigDecimal price);
+    Optional<Price> findByMedicinePrice(BigDecimal price);
 }

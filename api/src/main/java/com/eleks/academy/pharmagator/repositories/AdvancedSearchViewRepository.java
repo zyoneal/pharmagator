@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface AdvancedSearchViewRepository extends JpaRepository<AdvancedSearchView, PriceId>,
-                                                      JpaSpecificationExecutor<AdvancedSearchView> {
+public interface AdvancedSearchViewRepository extends JpaRepository<AdvancedSearchView, PriceId>, JpaSpecificationExecutor<AdvancedSearchView> {
 
     @Modifying
     @Transactional

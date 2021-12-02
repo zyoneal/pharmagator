@@ -104,7 +104,7 @@ public class PharmacyDSDataProvider implements DataProvider {
     private MedicineDto mapToMedicineDto(DSMedicineDto dsMedicineDto) {
         return MedicineDto.builder()
                 .externalId(dsMedicineDto.getId())
-                .price(dsMedicineDto.getPrice())
+                .medicinePrice(dsMedicineDto.getPrice())
                 .title(dsMedicineDto.getName())
                 .pharmacyName(pharmacyName)
                 .build();

@@ -87,7 +87,7 @@ public class PharmacyLiki24DataProvider implements DataProvider {
         return MedicineDto.builder()
                 .externalId(liki24MedicineDto.getProductId())
                 .title(liki24MedicineDto.getName())
-                .price(price)
+                .medicinePrice(price)
                 .pharmacyName(pharmacyName)
                 .build();
     }

@@ -74,7 +74,7 @@ class PriceControllerIT {
             this.mockMvc.perform(MockMvcRequestBuilders.get(URI
                             + "/pharmacyId/{pharmacyId}/medicineId/{medicineId}", pharmacyId, medicineId))
                     .andExpect(MockMvcResultMatchers.status().isOk())
-                    .andExpect(jsonPath("$.price").value(150.0))
+                    .andExpect(jsonPath("$.medicinePrice").value(150.0))
                     .andExpect(jsonPath("$.externalId").value(2021111201));
         } finally {
             this.dataSourceConnection.close();
@@ -108,7 +108,7 @@ class PriceControllerIT {
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\"price\": \"180.0\", \"externalId\": \"2021111201\"}"))
                     .andExpect(MockMvcResultMatchers.status().isOk())
-                    .andExpect(jsonPath("$.price").value(180.0));
+                    .andExpect(jsonPath("$.medicinePrice").value(180.0));
         } finally {
             this.dataSourceConnection.close();
         }

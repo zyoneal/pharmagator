@@ -41,7 +41,7 @@ class ExternalInputControllerTest {
     void getInputResult_isOk() throws Exception {
         MedicineDto medicineDto = MedicineDto.builder()
                 .title("Aspirin")
-                .price(new BigDecimal(46.6))
+                .medicinePrice(new BigDecimal(46.6))
                 .externalId("838949")
                 .pharmacyName("Veselka")
                 .build();

@@ -25,7 +25,7 @@ public class Price {
     @Id
     private Long medicineId;
 
-    private BigDecimal price;
+    private BigDecimal medicinePrice;
 
     private String externalId;
 

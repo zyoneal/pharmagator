@@ -27,7 +27,7 @@ public class ApiMedicineDtoConverter implements ApiDtoConverter<AptslavMedicineD
         return MedicineDto.builder()
                 .externalId(String.valueOf(externalId))
                 .title(title)
-                .price(aptslavPriceDto.getMin())
+                .medicinePrice(aptslavPriceDto.getMin())
                 .pharmacyName(pharmacyTitle)
                 .build();
     }

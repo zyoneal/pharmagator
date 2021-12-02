@@ -104,7 +104,7 @@ public class PharmacyRozetkaDataProvider implements DataProvider {
     private MedicineDto mapToMedicineDto(RozetkaMedicineDto rozetkaMedicineDto) {
         return MedicineDto.builder()
                 .externalId(rozetkaMedicineDto.getId().toString())
-                .price(rozetkaMedicineDto.getPrice())
+                .medicinePrice(rozetkaMedicineDto.getPrice())
                 .title(rozetkaMedicineDto.getTitle())
                 .pharmacyName(pharmacyName)
                 .build();

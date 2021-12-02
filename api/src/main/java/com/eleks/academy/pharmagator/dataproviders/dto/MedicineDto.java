@@ -14,8 +14,8 @@ public class MedicineDto {
     @Parsed(field = "title")
     private String title;
 
-    @Parsed(field = "price")
-    private BigDecimal price;
+    @Parsed(field = "medicinePrice")
+    private BigDecimal medicinePrice;
 
     @Parsed(field = "externalId")
     private String externalId;

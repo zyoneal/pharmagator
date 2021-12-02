@@ -71,7 +71,7 @@ public class PharmacyANCDataProvider implements DataProvider {
     private MedicineDto mapToMedicineDto(ANCMedicineDto ancMedicineDTO) {
         return MedicineDto.builder()
                 .externalId(ancMedicineDTO.getId())
-                .price(ancMedicineDTO.getPrice())
+                .medicinePrice(ancMedicineDTO.getPrice())
                 .title(ancMedicineDTO.getName())
                 .pharmacyName(pharmacyName)
                 .build();

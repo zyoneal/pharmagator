@@ -26,7 +26,7 @@ public class AdvancedSearchView {
     @Id
     private Long medicineId;
 
-    private BigDecimal price;
+    private BigDecimal medicinePrice;
 
     private String pharmacy;
 
