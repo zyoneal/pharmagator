@@ -1,6 +1,7 @@
 package com.eleks.academy.pharmagator.dataproviders.dto.liki24;
 
 import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

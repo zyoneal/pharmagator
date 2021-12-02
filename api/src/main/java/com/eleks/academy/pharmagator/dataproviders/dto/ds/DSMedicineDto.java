@@ -12,8 +12,11 @@ import java.math.BigDecimal;
 public class DSMedicineDto {
 
     private String id;
+
     private String name;
+
     private BigDecimal price;
+
     private String manufacturer;
 
 }

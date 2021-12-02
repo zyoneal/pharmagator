@@ -26,14 +26,20 @@ public class PharmacyDSDataProvider implements DataProvider {
     @Qualifier("pharmacyDSWebClient")
     private final WebClient dsClient;
 
-    @Value("${pharmagator.data-providers.apteka-ds.category-fetch-url}")
+    @Value("${pharmagator.data-providers.pharmacy-ds.category-fetch-url}")
     private String categoriesFetchUrl;
 
-    @Value("${pharmagator.data-providers.apteka-ds.category-path}")
+    @Value("${pharmagator.data-providers.pharmacy-ds.category-path}")
     private String categoryPath;
 
-    @Value("${pharmagator.data-providers.apteka-ds.pharmacy-name}")
+    @Value("${pharmagator.data-providers.pharmacy-ds.pharmacy-name}")
     private String pharmacyName;
+
+    @Value("${pharmagator.data-providers.pharmacy-ds.page-limit}")
+    private Long pageLimit;
+
+    @Value("${pharmagator.data-providers.pharmacy-ds.products-per-page-limit}")
+    private Long productsPerPageLimit;
 
     @Override
     public Stream<MedicineDto> loadData() {
@@ -52,12 +58,9 @@ public class PharmacyDSDataProvider implements DataProvider {
     }
 
     private Stream<MedicineDto> fetchMedicinesByCategory(String category) {
-
-        Long pageSize = 100L;
-
         FilterRequest filterRequest = FilterRequest.builder()
                 .page(1L)
-                .per(100L)
+                .per(productsPerPageLimit)
                 .build();
 
         DSMedicinesResponse dsMedicinesResponse = this.dsClient.post()
@@ -70,7 +73,9 @@ public class PharmacyDSDataProvider implements DataProvider {
         Long total;
         if (dsMedicinesResponse != null) {
             total = dsMedicinesResponse.getTotal();
-            long pageCount = total / pageSize;
+            long pageCount = total / productsPerPageLimit;
+
+            pageCount = pageCount > pageLimit ? pageLimit : pageCount;
 
             List<DSMedicinesResponse> responseList = new ArrayList<>();
             long page = 1L;
@@ -79,7 +84,7 @@ public class PharmacyDSDataProvider implements DataProvider {
                         .uri(categoryPath + "/" + category)
                         .body(Mono.just(FilterRequest.builder()
                                 .page(page)
-                                .per(pageSize)
+                                .per(productsPerPageLimit)
                                 .build()), FilterRequest.class)
                         .retrieve()
                         .bodyToMono(DSMedicinesResponse.class)
