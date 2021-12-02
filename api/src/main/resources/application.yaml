@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql:pharmagator
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://ec2-34-254-120-2.eu-west-1.compute.amazonaws.com/d221i6arbqu1d0
+    username: bsfiwtzihgsfhx
+    password: 05245eeb6a21f836ea818e47a1a34bd51c428c993495260b3aaf4434a52d326e
   jpa:
     hibernate:
       ddl-auto: validate
