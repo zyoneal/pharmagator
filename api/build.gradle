@@ -10,6 +10,9 @@ group = 'com.eleks.academy'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_17
 
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
 jacoco {
     toolVersion = "0.8.7"
 }
