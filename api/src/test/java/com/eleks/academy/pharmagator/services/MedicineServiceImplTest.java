@@ -34,9 +34,9 @@ class MedicineServiceImplTest {
     @InjectMocks
     private MedicineServiceImpl medicineService;
 
-    MedicineDto medicineDto;
+    private MedicineDto medicineDto;
 
-    List<Medicine> allMedicines;
+    private List<Medicine> allMedicines;
 
     @BeforeEach
     void init() {

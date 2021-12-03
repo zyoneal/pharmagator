@@ -1,8 +1,6 @@
 package com.eleks.academy.pharmagator.services;
 
-import com.eleks.academy.pharmagator.dataproviders.dto.input.MedicineDto;
 import com.eleks.academy.pharmagator.dataproviders.dto.input.PharmacyDto;
-import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.entities.Pharmacy;
 import com.eleks.academy.pharmagator.repositories.PharmacyRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
@@ -33,11 +30,11 @@ class PharmacyServiceImplTest {
     private PharmacyRepository repository;
 
     @InjectMocks
-    PharmacyServiceImpl service;
+    private PharmacyServiceImpl service;
 
-    PharmacyDto pharmacyDto;
+    private PharmacyDto pharmacyDto;
 
-    List<Pharmacy> pharmacyList;
+    private List<Pharmacy> pharmacyList;
 
     @BeforeEach
     void init() {
