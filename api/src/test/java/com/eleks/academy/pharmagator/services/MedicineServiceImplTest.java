@@ -36,21 +36,24 @@ class MedicineServiceImplTest {
 
     MedicineDto medicineDto;
 
+    List<Medicine> allMedicines;
+
     @BeforeEach
     void init() {
         medicineDto = new MedicineDto();
         medicineDto.setTitle("Aspirin");
+
+        allMedicines = new LinkedList<>();
+        allMedicines.add(new Medicine(1L, "title1"));
+        allMedicines.add(new Medicine(2L, "title2"));
     }
 
     @Test
-    void test_FindAll_ok() {
-        List<Medicine> all = new LinkedList<>();
-        all.add(new Medicine(1L, "title1"));
-        all.add(new Medicine(2L, "title2"));
-        when(repository.findAll()).thenReturn(all);
+    void test_findAll_ok() {
+        when(repository.findAll()).thenReturn(allMedicines);
         List<Medicine> medicines = medicineService.findAll();
         verify(repository).findAll();
-        assertThat(medicines).isNotEmpty().matches(list -> list.size() == all.size());
+        assertThat(medicines).isNotEmpty().matches(list -> list.size() == allMedicines.size());
     }
 
     @Test
