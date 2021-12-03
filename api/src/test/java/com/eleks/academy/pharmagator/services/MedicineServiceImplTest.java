@@ -16,9 +16,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -41,9 +43,21 @@ class MedicineServiceImplTest {
     }
 
     @Test
-    void canFindAllMedicines() {
-        repository.findAll();
+    void test_FindAll_ok() {
+        List<Medicine> all = new LinkedList<>();
+        all.add(new Medicine(1L, "title1"));
+        all.add(new Medicine(2L, "title2"));
+        when(repository.findAll()).thenReturn(all);
+        List<Medicine> medicines = medicineService.findAll();
         verify(repository).findAll();
+        assertThat(medicines).isNotEmpty().matches(list -> list.size() == all.size());
+    }
+
+    @Test
+    void test_repoReturnsEmptyList_ok() {
+        when(this.repository.findAll()).thenReturn(List.of());
+        final var medicines = this.medicineService.findAll();
+        assertThat(medicines).isEmpty();
     }
 
     @Test
@@ -75,7 +89,7 @@ class MedicineServiceImplTest {
     @Disabled
     void canUpdateMedicine() {
         final var id = 10L;
-        medicineService.update(id,medicineDto);
+        medicineService.update(id, medicineDto);
         ArgumentCaptor<Medicine> medicineArgumentCaptor = ArgumentCaptor.forClass(Medicine.class);
         verify(repository).findById(Mockito.anyLong());
         verify(repository).save(medicineArgumentCaptor.capture());
