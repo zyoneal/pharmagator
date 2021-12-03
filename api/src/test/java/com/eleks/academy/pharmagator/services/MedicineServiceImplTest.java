@@ -1,6 +1,5 @@
 package com.eleks.academy.pharmagator.services;
 
-
 import com.eleks.academy.pharmagator.dataproviders.dto.input.MedicineDto;
 import com.eleks.academy.pharmagator.entities.Medicine;
 import com.eleks.academy.pharmagator.repositories.MedicineRepository;
@@ -13,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -38,8 +38,16 @@ class MedicineServiceImplTest {
 
     private List<Medicine> allMedicines;
 
+    private final Medicine testMedicine = new Medicine();
+
+    @Mock
+    ModelMapper modelMapper;
+
     @BeforeEach
     void init() {
+        testMedicine.setId(20211103L);
+        testMedicine.setTitle("title");
+
         medicineDto = new MedicineDto();
         medicineDto.setTitle("Aspirin");
 
@@ -81,7 +89,6 @@ class MedicineServiceImplTest {
     }
 
     @Test
-    @Disabled
     void canSaveMedicine() {
         medicineService.save(medicineDto);
         ArgumentCaptor<Medicine> medicineArgumentCaptor = ArgumentCaptor.forClass(Medicine.class);
@@ -92,9 +99,11 @@ class MedicineServiceImplTest {
     @Disabled
     void canUpdateMedicine() {
         final var id = 10L;
+        when(this.repository.findById(Mockito.anyLong())).thenReturn(Optional.of(this.testMedicine));
+        when(this.repository.save(Mockito.any(Medicine.class))).thenReturn(this.testMedicine);
         medicineService.update(id, medicineDto);
         ArgumentCaptor<Medicine> medicineArgumentCaptor = ArgumentCaptor.forClass(Medicine.class);
-        verify(repository).findById(Mockito.anyLong());
+        verify(repository).findById(id);
         verify(repository).save(medicineArgumentCaptor.capture());
     }
 

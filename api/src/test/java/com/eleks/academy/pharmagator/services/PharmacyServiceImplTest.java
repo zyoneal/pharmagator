@@ -11,6 +11,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -35,6 +36,9 @@ class PharmacyServiceImplTest {
     private PharmacyDto pharmacyDto;
 
     private List<Pharmacy> pharmacyList;
+
+    @Mock
+    ModelMapper modelMapper;
 
     @BeforeEach
     void init() {
@@ -81,7 +85,6 @@ class PharmacyServiceImplTest {
     }
 
     @Test
-    @Disabled
     void canSavePharmacy() {
         service.save(pharmacyDto);
         ArgumentCaptor<Pharmacy> pharmacyArgumentCaptor = ArgumentCaptor.forClass(Pharmacy.class);

@@ -12,6 +12,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -40,6 +41,9 @@ class PriceServiceImplTest {
     private Price testPrice;
 
     private List<Price> priceList;
+
+    @Mock
+    ModelMapper modelMapper;
 
     @BeforeEach
     void init() {
