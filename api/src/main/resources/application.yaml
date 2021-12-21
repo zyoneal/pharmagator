@@ -41,7 +41,7 @@ pharmagator:
       page-size: 10
       pharmacy-name: pharmacy-anc
     pharmacy-liki24:
-      url: https://liki24.com/vnext/api/catalogue/8000002/products
+      url: https://liki24.com/vnext/api/catalogue/8000001/products
       initial-page-index: 1
       pharmacy-name: pharmacy-liki24
       page-limit: 5
